@@ -1,9 +1,12 @@
 package org.restapi.crud.musichall.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Musicien {
@@ -14,11 +17,19 @@ public class Musicien {
 	private String musicien_nom;
 	private String musicien_prenom;
 	
+	// Utilisation Hibernate ONE-TO-ONE
+	@OneToOne( cascade = CascadeType.ALL ) 
+	//presente Cle etrange
+	@JoinColumn(name="instrument_id", referencedColumnName="instrument_id") 
+	private Instrument musicienInstrument;
+
+	
 	//Declare valeur initial	
 	public Musicien() {
 		this(0,"inconnu","inconnu");
 	}
 	
+
 	// Contructor avec 2 parametres
 	public Musicien(String string, String string2) {
 		this.musicien_nom = string;
@@ -37,7 +48,6 @@ public class Musicien {
 		return "Musicien [idMusicien=" + musicien_id + ", nom=" + musicien_nom + ", prenom=" + musicien_prenom  + "]";
 	}
 	
-
 
 	//Getter et Setter
 	public int getIdMusicien() {
@@ -61,5 +71,12 @@ public class Musicien {
 		this.musicien_prenom = musicien_prenom;
 	}
 
+	public Instrument getMusicienInstrument() {
+		return musicienInstrument;
+	}
+
+	public void setMusicienInstrument(Instrument musicienInstrument) {
+		this.musicienInstrument = musicienInstrument;
+	}
 	
 }

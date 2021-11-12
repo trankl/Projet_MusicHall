@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.restapi.crud.musichall.model.Instrument;
 import org.restapi.crud.musichall.model.Musicien;
 
 public class MusicienService {
@@ -29,7 +30,11 @@ public class MusicienService {
 			EntityTransaction trans = entityManager.getTransaction();
 			//commencer la transaction
 			trans.begin(); 
-
+			
+			// Creer nouveau instrument
+			Instrument instr = new Instrument ("inconnu","inconnu");
+			// ajouter instrument au musicien
+			musicien.setMusicienInstrument(instr);
 			// Synchronyser valeur au donnee pour ajouter nouveau musicien
 			entityManager.persist(musicien);
 
@@ -117,7 +122,7 @@ public class MusicienService {
 
 	}
 
-	public void update(Musicien musicien, int id) throws Exception {
+	public void updateMusicien(Musicien musicien, int id) throws Exception {
 		try {
 			// Appel fichier persistence.xml
 			entityManagerFactory = Persistence.createEntityManagerFactory("app-DB"); // "app-DB" est nom de fichier persistence
@@ -165,6 +170,9 @@ public class MusicienService {
 			// Appel 1 seul objet au id
 			Musicien musicien = entityManager.find(Musicien.class,id);
 			System.out.println("afficher "+musicien);
+			
+			Instrument l_instrumentAssocie = musicien.getMusicienInstrument();
+			System.out.println("Ce musicien joue" + l_instrumentAssocie);
 			return musicien;
 	}
 		finally {

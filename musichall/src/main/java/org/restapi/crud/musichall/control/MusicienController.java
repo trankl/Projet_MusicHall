@@ -2,6 +2,7 @@ package org.restapi.crud.musichall.control;
 
 import java.util.List;
 
+import org.restapi.crud.musichall.model.Instrument;
 import org.restapi.crud.musichall.model.Musicien;
 import org.restapi.crud.musichall.service.MusicienService;
 
@@ -70,7 +71,7 @@ private MusicienService service = new MusicienService();
 		@Consumes(MediaType.APPLICATION_JSON)
 		public void updateMusicien (Musicien musicien, @PathParam("id") int id) throws Exception {
 			// On demande au service d'executer la methode "update" 
-			service.update(musicien, id);
+			service.updateMusicien(musicien, id);
 		}
 		
 		//cette methode a definit la partie de l'url d'acces a webservice sous path /deleteMusicien/{id}
