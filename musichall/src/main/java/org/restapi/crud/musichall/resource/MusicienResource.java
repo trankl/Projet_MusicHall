@@ -1,4 +1,4 @@
-package org.restapi.crud.musichall.control;
+package org.restapi.crud.musichall.resource;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import jakarta.ws.rs.core.MediaType;
 
 
 @Path ("/musicien")
-public class MusicienController {
+public class MusicienResource {
 
 		@GET
 	    @Produces(MediaType.TEXT_PLAIN)
