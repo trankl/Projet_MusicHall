@@ -57,7 +57,7 @@ public class MusicienService {
 
 
 	// Methode pour afficher list des musiciens
-	public List<Musicien> getAll() throws Exception {
+	public List<Musicien> getAllMusicien() throws Exception {
 		// Declarer list des variables musiciens
 		List<Musicien> listMusicien = new ArrayList<>();
 		try {
@@ -173,6 +173,30 @@ public class MusicienService {
 			
 			Instrument l_instrumentAssocie = musicien.getMusicienInstrument();
 			System.out.println("Ce musicien joue" + l_instrumentAssocie);
+			return musicien;
+	}
+		finally {
+			// fermer la connection au DB
+			if (entityManager!=null) { entityManager.close();}
+			if (entityManagerFactory!=null) {entityManagerFactory.close();
+			System.out.println("Disconnected");}
+		}
+		
+	}
+	
+	public Musicien findByName(String name) throws Exception {
+		try {
+			// Appel fichier persistence.xml
+			entityManagerFactory = Persistence.createEntityManagerFactory("app-DB"); // "app-DB" est nom de fichier persistence
+			System.out.println("Get connect to database...");
+			// Demander la connection au DB
+			entityManager = entityManagerFactory.createEntityManager();
+			System.out.println("Connected");
+
+			// Appel 1 seul objet au id
+			Musicien musicien = entityManager.find(Musicien.class,name);
+			System.out.println("afficher "+musicien);
+			
 			return musicien;
 	}
 		finally {

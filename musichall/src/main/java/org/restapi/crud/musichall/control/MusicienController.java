@@ -37,7 +37,6 @@ private MusicienService service = new MusicienService();
 		public Musicien addMusicien (Musicien musicien) throws Exception {
 			// On demande au service d'executer la methode "insertMusicien" et retour user
 			return service.insertMusicien(musicien);
-			
 		}	
 
 		//cette methode a definit la partie de l'url d'acces a webservice sous path /getAllMusiciens
@@ -48,21 +47,9 @@ private MusicienService service = new MusicienService();
 		@Produces(MediaType.APPLICATION_JSON) 
 		public List<Musicien> getAllMusicien () throws Exception {
 		// On demande au service d'executer la methode "getAll" et retour la liste
-		return service.getAll();
-		
-	}
-	
-		//cette methode a definit la partie de l'url d'acces a webservice sous path //findbyIDMusicien/{id}
-		//elle s'utilise avec GET
-		//elle prend du JSON en entree
-		@Path("/findbyIDMusicien/{id}")
-		@GET
-		@Produces(MediaType.APPLICATION_JSON)
-		public Musicien getMusicien (@PathParam("id") int id) throws Exception {
-			// On demande au service d'executer la methode "findById(id)" et retour la musicien avec id recherche
-			return service.findById(id);
+		return service.getAllMusicien();
 		}
-		
+	
 		//cette methode a definit la partie de l'url d'acces a webservice sous path /updateMusicien
 		//elle s'utilise avec POST
 		//elle prend du JSON en entree
@@ -84,5 +71,28 @@ private MusicienService service = new MusicienService();
 			// On demande au service d'executer la methode "remove" 
 			service.removeMusicien(id);
 			
+		}
+		
+		//cette methode a definit la partie de l'url d'acces a webservice sous path //findbyIDMusicien/{id}
+		//elle s'utilise avec GET
+		//elle prend du JSON en entree
+		@Path("/findbyIDMusicien/{id}")
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		public Musicien getMusicienByID (@PathParam("id") int id) throws Exception {
+			// On demande au service d'executer la methode "findById(id)" et retour la musicien avec id recherche
+			return service.findById(id);
+		}
+
+
+		//cette methode a definit la partie de l'url d'acces a webservice sous path //findbyIDMusicien/{id}
+		//elle s'utilise avec GET
+		//elle prend du JSON en entree
+		@Path("/findbyNameMusicien/{name}")
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		public Musicien getMusicienByName (@PathParam("name") String name) throws Exception {
+			// On demande au service d'executer la methode "findById(id)" et retour la musicien avec id recherche
+			return service.findByName(name);
 		}
 }
