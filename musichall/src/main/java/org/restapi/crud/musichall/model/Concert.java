@@ -35,7 +35,7 @@ public class Concert {
 	 // Initiliation variable
 	 
 	 public Concert() {
-			this( "nom","date", "lieu");
+			this( "inconnu","inconnu", "inconnu");
 			
 		}
 	 
