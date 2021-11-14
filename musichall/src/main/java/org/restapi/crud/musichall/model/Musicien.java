@@ -1,12 +1,20 @@
 package org.restapi.crud.musichall.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.json.bind.annotation.JsonbTransient;
+
+
 
 @Entity
 public class Musicien {
@@ -17,11 +25,23 @@ public class Musicien {
 	private String musicien_nom;
 	private String musicien_prenom;
 	
-	// Utilisation Hibernate ONE-TO-ONE
-	@OneToOne( cascade = CascadeType.ALL ) 
-	//presente Cle etrange
-	@JoinColumn(name="instrument_id", referencedColumnName="instrument_id") 
-	private Instrument musicienInstrument;
+	/*
+	// Utilisation Hibernate MANY-TO-MANY : 1 musicien peut joue au plusieurs concert et 1 concert peut avoir plusieurs musiciens
+	@ManyToMany
+	@JoinTable(name="asso_musicien_concert",
+	joinColumns = @JoinColumn(name="concert_id"),
+	inverseJoinColumns = @JoinColumn (name="musicien_id"))
+	private List<Concert> concerts;
+	
+	*/
+	
+	// Utilisation Hibernate ONE-TO-MANY : 1 musicien peut jouer plusieurs instrument
+	// @JsonManagedReference is the forward part of reference which gets serialized normally.
+	@JsonManagedReference
+	// By default, JSONB ignores properties with a non public access. All public properties - either public fields or non public fields with public getters are serialized into JSON text. Class properties annotated with @JsonbTransient annotation are ignored by JSON Binding engine.
+	@JsonbTransient
+	@OneToMany( targetEntity=Instrument.class, mappedBy="musicien", cascade = CascadeType.ALL )
+    private List<Instrument> Instruments = new ArrayList<>();
 
 	
 	//Declare valeur initial	
@@ -45,7 +65,7 @@ public class Musicien {
 	
 	@Override
 	public String toString() {
-		return "Musicien [idMusicien=" + musicien_id + ", nom=" + musicien_nom + ", prenom=" + musicien_prenom  + "]";
+		return "Musicien [idMusicien=" + musicien_id + ", nom=" + musicien_nom + ", prenom=" + musicien_prenom  + "] joue " +Instruments;
 	}
 	
 
@@ -71,12 +91,28 @@ public class Musicien {
 		this.musicien_prenom = musicien_prenom;
 	}
 
-	public Instrument getMusicienInstrument() {
-		return musicienInstrument;
+	/*
+
+	public List<Concert> getConcerts() {
+		return concerts;
 	}
 
-	public void setMusicienInstrument(Instrument musicienInstrument) {
-		this.musicienInstrument = musicienInstrument;
+
+	public void setConcerts(List<Concert> concerts) {
+		this.concerts = concerts;
 	}
+
+*/
+	public List<Instrument> getInstruments() {
+		return Instruments;
+	}
+
+
+	public void setInstruments(List<Instrument> instruments) {
+		Instruments = instruments;
+	}
+
+	
+
 	
 }

@@ -10,6 +10,7 @@
         
       <class>org.restapi.crud.musichall.model.Musicien</class>
       <class>org.restapi.crud.musichall.model.Instrument</class>
+      <class>org.restapi.crud.musichall.model.Concert</class>
       
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />

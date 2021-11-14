@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import org.restapi.crud.musichall.model.Instrument;
+import org.restapi.crud.musichall.model.Musicien;
 
 public class InstrumentService {
 	// Demarer le systeme
@@ -30,6 +31,10 @@ public class InstrumentService {
 			//commencer la transaction
 			trans.begin(); 
 			
+			// Creer nouveau musicien
+			Musicien musicien = new Musicien ("inconnu","inconnu");
+			// ajouter musicien au instrument
+			instrument.setMusicien(musicien);
 			// Synchronyser valeur au donnee pour ajouter nouveau instrument
 			entityManager.persist(instrument);
 
@@ -52,7 +57,7 @@ public class InstrumentService {
 
 
 	// Methode pour afficher list des instruments
-	public List<Instrument> getAllIntrument() throws Exception {
+	public List<Instrument> getAllInstrument() throws Exception {
 		// Declarer list des variables instruments
 		List<Instrument> listInstrument = new ArrayList<>();
 		try {

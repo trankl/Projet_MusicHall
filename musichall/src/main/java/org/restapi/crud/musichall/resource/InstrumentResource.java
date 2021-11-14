@@ -29,12 +29,12 @@ public class InstrumentResource {
 		//cette methode a definit la partie de l'url d'acces a webservice sous path /getAllInstruments
 		//elle s'utilise avec GET
 		//elle prend du JSON en entree
-		@Path ("/getAllInstrument")
+		@Path ("/getAllInstruments")
 		@GET  
 		@Produces(MediaType.APPLICATION_JSON) 
 		public List<Instrument> getAllInstrument () throws Exception {
 			// On demande au service d'executer la methode "getAll" et retour la liste
-			return service.getAllIntrument();
+			return service.getAllInstrument();
 
 		}
 
@@ -46,7 +46,7 @@ public class InstrumentResource {
 		@POST  
 		@Consumes(MediaType.APPLICATION_JSON) 
 		public Instrument addInstrument (Instrument instrument) throws Exception {
-			// On demande au service d'executer la methode "insertInstrument" et retour user
+			// On demande au service d'executer la methode "insertInstrument" et retour instrument
 			return service.insertInstrument(instrument);
 			
 		}	

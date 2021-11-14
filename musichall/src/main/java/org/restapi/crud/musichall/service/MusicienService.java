@@ -31,10 +31,6 @@ public class MusicienService {
 			//commencer la transaction
 			trans.begin(); 
 			
-			// Creer nouveau instrument
-			Instrument instr = new Instrument ("inconnu","inconnu");
-			// ajouter instrument au musicien
-			musicien.setMusicienInstrument(instr);
 			// Synchronyser valeur au donnee pour ajouter nouveau musicien
 			entityManager.persist(musicien);
 
@@ -171,8 +167,6 @@ public class MusicienService {
 			Musicien musicien = entityManager.find(Musicien.class,id);
 			System.out.println("afficher "+musicien);
 			
-			Instrument l_instrumentAssocie = musicien.getMusicienInstrument();
-			System.out.println("Ce musicien joue" + l_instrumentAssocie);
 			return musicien;
 	}
 		finally {
