@@ -28,10 +28,9 @@ public class Instrument {
 	 // Initiliation variable
 	 public Instrument() {
 		
-		this("instrument_nom", "instrument_masque");
+		this("inconnu", "inconnu");
 	}
 	public Instrument(String instrument_nom, String instrument_masque) {
-		super();
 		this.instrument_nom = instrument_nom;
 		this.instrument_masque = instrument_masque;
 	}

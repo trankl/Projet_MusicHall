@@ -32,7 +32,7 @@ public class InstrumentService {
 			trans.begin(); 
 			
 			// Creer nouveau musicien
-			Musicien musicien = new Musicien ("inconnu","inconnu");
+			Musicien musicien = new Musicien ();
 			// ajouter musicien au instrument
 			instrument.setMusicien(musicien);
 			// Synchronyser valeur au donnee pour ajouter nouveau instrument
