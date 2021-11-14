@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.restapi.crud.musichall.model.Concert;
 import org.restapi.crud.musichall.model.Instrument;
 import org.restapi.crud.musichall.model.Musicien;
 
@@ -162,10 +163,26 @@ public class MusicienService {
 			// Demander la connection au DB
 			entityManager = entityManagerFactory.createEntityManager();
 			System.out.println("Connected");
-
+			
+			
 			// Appel 1 seul objet au id
 			Musicien musicien = entityManager.find(Musicien.class,id);
 			System.out.println("afficher "+musicien);
+			
+			// Afficher ses instruments 
+			System.out.println("Il joue les instruments :");
+			List<Instrument> musicienInstruments = musicien.getInstruments();
+			for (Instrument instrument : musicienInstruments) {
+				System.out.println(instrument);
+			}
+			
+			// Afficher ses concerts
+			System.out.println("Il joue au concert :");
+			List<Concert> musicienConcerts = musicien.getConcerts();
+			for (Concert concert : musicienConcerts) {
+				System.out.println(concert);
+			}
+			
 			
 			return musicien;
 	}
@@ -190,6 +207,21 @@ public class MusicienService {
 			// Appel 1 seul objet au id
 			Musicien musicien = entityManager.find(Musicien.class,name);
 			System.out.println("afficher "+musicien);
+			
+			// Afficher ses instruments 
+			System.out.println("Il joue les instruments :");
+			List<Instrument> musicienInstruments = musicien.getInstruments();
+			for (Instrument instrument : musicienInstruments) {
+				System.out.println(instrument);
+			}
+
+			// Afficher ses concerts
+			System.out.println("Il joue au concert :");
+			List<Concert> musicienConcerts = musicien.getConcerts();
+			for (Concert concert : musicienConcerts) {
+				System.out.println(concert);
+			}
+
 			
 			return musicien;
 	}
