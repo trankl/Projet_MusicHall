@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -47,10 +48,15 @@ public class Musicien {
 	@OneToMany( targetEntity=Instrument.class, mappedBy="musicien", cascade = CascadeType.ALL )
     private List<Instrument> instruments = new ArrayList<>();
 
+	// Utilisation Hibernate ONE-TO-One : 1 musicien a 1 seul slogan
+	@OneToOne (cascade = CascadeType.ALL)
+	@JoinColumn(name="slogan_id", referencedColumnName="slogan_id")  
+	private Slogan musicienSlogan;
+	
 	
 	//Declare valeur initial	
 	public Musicien() {
-		this(0,"inconnu","inconnu");
+		this("inconnu","inconnu");
 	}
 	
 
@@ -117,7 +123,15 @@ public class Musicien {
 	}
 
 
-	
+	public Slogan getMusicienSlogan() {
+		return musicienSlogan;
+	}
+
+
+	public void setMusicienSlogan(Slogan musicienSlogan) {
+		this.musicienSlogan = musicienSlogan;
+	}
+
 
 	
 }

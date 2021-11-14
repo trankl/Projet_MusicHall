@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
 import org.restapi.crud.musichall.model.Concert;
 import org.restapi.crud.musichall.model.Instrument;
 import org.restapi.crud.musichall.model.Musicien;
+import org.restapi.crud.musichall.model.Slogan;
 
 public class MusicienService {
 	// Demarer le systeme
@@ -32,6 +33,8 @@ public class MusicienService {
 			//commencer la transaction
 			trans.begin(); 
 			
+			Slogan sonSlogan = new Slogan();
+			musicien.setMusicienSlogan(sonSlogan);
 			// Synchronyser valeur au donnee pour ajouter nouveau musicien
 			entityManager.persist(musicien);
 
